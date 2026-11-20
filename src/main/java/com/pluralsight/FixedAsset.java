@@ -11,6 +11,22 @@ public abstract class FixedAsset implements Valuable {
         this.marketValue = marketValue;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public BigDecimal getMarketValue() {
+        return marketValue;
+    }
+
+    public void setMarketValue(BigDecimal marketValue) {
+        this.marketValue = marketValue;
+    }
+
     public BigDecimal getValue() {
         return marketValue;
     }
