@@ -3,8 +3,8 @@ package com.pluralsight;
 import java.math.BigDecimal;
 
 public abstract class FixedAsset implements Valuable {
-    private String name;
-    private BigDecimal marketValue;
+    private final String name;
+    private final BigDecimal marketValue;
 
     public FixedAsset(String name, BigDecimal marketValue) {
         this.name = name;
@@ -15,16 +15,8 @@ public abstract class FixedAsset implements Valuable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public BigDecimal getMarketValue() {
         return marketValue;
-    }
-
-    public void setMarketValue(BigDecimal marketValue) {
-        this.marketValue = marketValue;
     }
 
     public BigDecimal getValue() {
