@@ -38,7 +38,7 @@ public class BankAccount {
         balance = balance.add(amount);
     }
 
-    // Subtracts money to balance
+    // Subtracts money from balance
     public void withdraw(BigDecimal amount) {
         balance = balance.subtract(amount);
     }
