@@ -3,8 +3,11 @@ package com.pluralsight;
 import com.pluralsight.finance.BankAccount;
 import com.pluralsight.finance.CreditCard;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class FinanceApplication {
+    private static Portfolio portfolio;
+
     public static void main(String[] args) {
         // Welcome message
         displayWelcomeMessage();
@@ -14,10 +17,10 @@ public class FinanceApplication {
         String owner = Console.promptForString("Enter your name: "); // Get owner name
 
         // Create portfolio
-        Portfolio portfolio = new Portfolio(name, owner);
+        portfolio = new Portfolio(name, owner);
 
         // Display menu
-        displayMenu();
+        displayHomeScreen();
         BankAccount account1 = new BankAccount("Pam", "123", new BigDecimal("12500"));
         CreditCard account2 = new CreditCard("Gary", "456", new BigDecimal("1500"));
 
@@ -34,7 +37,7 @@ public class FinanceApplication {
     }
 
     // Displays menu
-    public static void displayMenu() {
+    public static void displayHomeScreen() {
         System.out.println("""
                 \n------------------------------
                              Home
@@ -48,6 +51,8 @@ public class FinanceApplication {
                 [7] Exit
                 """);
         int selectedOption = 0;
+
+        // Repeat prompt until valid number
         while (selectedOption != 7) {
             selectedOption = Console.promptForInt("› Select [0-6]: ");
             switch (selectedOption) {
@@ -64,9 +69,21 @@ public class FinanceApplication {
     }
 
     private static void addBankAccount() {
+        String name = Console.promptForString("Enter account name: ");
+        String accountNumber = Console.promptForString("Enter account number: ");
+        BigDecimal balance = Console.promptForBigDecimal("Enter balance: ").setScale(2, RoundingMode.HALF_UP);
+        BankAccount bankAccount = new BankAccount(name, accountNumber, balance); // Create bank account
+        portfolio.add(bankAccount); // Add account to portfolio
+        printAssetAddedMessage(bankAccount); // Success message
     }
 
     private static void addCreditCard() {
+        String name = Console.promptForString("Enter account name: ");
+        String accountNumber = Console.promptForString("Enter account number: ");
+        BigDecimal balance = Console.promptForBigDecimal("Enter balance: ").setScale(2, RoundingMode.HALF_UP);
+        CreditCard creditCard = new CreditCard(name, accountNumber, balance); // Create bank account
+        portfolio.add(creditCard); // Add account to portfolio
+        printAssetAddedMessage(creditCard); // Success message
     }
 
     private static void addHouse() {
@@ -79,5 +96,9 @@ public class FinanceApplication {
     }
 
     private static void viewAllAssets() {
+    }
+
+    private static void printAssetAddedMessage(Valuable asset) {
+        System.out.println("\nAsset successfully added to your portfolio!");
     }
 }
