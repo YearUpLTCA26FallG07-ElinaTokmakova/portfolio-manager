@@ -1,8 +1,8 @@
 package com.pluralsight.finance;
-
+import com.pluralsight.Valuable;
 import java.math.BigDecimal;
 
-public class BankAccount {
+public class BankAccount implements Valuable {
     private String name;
     private final String accountNumber;
     private BigDecimal balance;
