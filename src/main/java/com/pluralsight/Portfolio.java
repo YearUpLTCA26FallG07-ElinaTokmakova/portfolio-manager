@@ -47,25 +47,29 @@ public class Portfolio implements Valuable {
     }
 
     // Returns the asset that has the highest value
-    public BigDecimal getMostValuable() {
+    public Valuable getMostValuable() {
+        Valuable mostValuable = assets.get(0);
         BigDecimal maxValue = assets.get(0).getValue();
         for (int i = 1; i < assets.size(); i++) {
             if (assets.get(i).getValue().compareTo(maxValue) > 0) {
+                mostValuable = assets.get(i);
                 maxValue = assets.get(i).getValue();
             }
         }
-        return maxValue.setScale(2, RoundingMode.HALF_UP);
+        return mostValuable;
     }
 
     // Returns the asset that has the lowest value
-    public BigDecimal getLeastValuable() {
+    public Valuable getLeastValuable() {
+        Valuable leastValuable = assets.get(0);
         BigDecimal minValue = assets.get(0).getValue();
         for (int i = 1; i < assets.size(); i++) {
             if (assets.get(i).getValue().compareTo(minValue) < 0) {
                 minValue = assets.get(i).getValue();
+                leastValuable = assets.get(i);
             }
         }
-        return minValue.setScale(2, RoundingMode.HALF_UP);
+        return leastValuable;
     }
 
     // Returns all assets in assets list

@@ -2,6 +2,7 @@ package com.pluralsight;
 
 import com.pluralsight.finance.BankAccount;
 import com.pluralsight.finance.CreditCard;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
@@ -37,18 +38,18 @@ public class FinanceApplication {
         // Repeat prompt until valid number
         int selectedOption = 0;
         while (selectedOption != 7) {
-        System.out.println("""
-                \n------------------------------
-                             Home
-                ------------------------------
-                [1] Add bank account
-                [2] Add credit card
-                [3] Add house
-                [4] Add gold
-                [5] Add jewelry
-                [6] View all assets
-                [7] Exit
-                """);
+            System.out.println("""
+                    \n------------------------------
+                                 Home
+                    ------------------------------
+                    [1] Add bank account
+                    [2] Add credit card
+                    [3] Add house
+                    [4] Add gold
+                    [5] Add jewelry
+                    [6] View all assets
+                    [7] Exit
+                    """);
             selectedOption = Console.promptForInt("› Select [0-6]: ");
             switch (selectedOption) {
                 case 1 -> addBankAccount();
@@ -56,7 +57,7 @@ public class FinanceApplication {
                 case 3 -> addHouse();
                 case 4 -> addGold();
                 case 5 -> addJewelry();
-                case 6 -> portfolio.getAllAssets();
+                case 6 -> viewAssets();
                 case 7 -> System.out.println("\nThanks for using our app!");
                 default -> System.out.println("Number should be between 1 and 6.");
             }
@@ -86,8 +87,8 @@ public class FinanceApplication {
         BigDecimal marketValue = Console.promptForBigDecimal("Enter market value: ").setScale(2, RoundingMode.HALF_UP);
         int yearBuilt = Console.promptForInt("Enter year when house was built: ");
         int squareFeet = Console.promptForInt("Enter total square feet: ");
-        int bedrooms= Console.promptForInt("Enter number of bedrooms: ");
-House house = new House(name, marketValue, yearBuilt, squareFeet, bedrooms); // Create house asset
+        int bedrooms = Console.promptForInt("Enter number of bedrooms: ");
+        House house = new House(name, marketValue, yearBuilt, squareFeet, bedrooms); // Create house asset
         portfolio.add(house); // Add house to portfolio
         printAssetAddedMessage(); // Success message
     }
@@ -112,5 +113,42 @@ House house = new House(name, marketValue, yearBuilt, squareFeet, bedrooms); // 
 
     private static void printAssetAddedMessage() {
         System.out.println("\nAsset successfully added to your portfolio!");
+    }
+
+    private static void viewAssets() {
+        // Repeat prompt until valid number
+        int selectedOption = 0;
+        while (selectedOption != 4) {
+            System.out.println("""
+                    \n------------------------------
+                                 Assets
+                    ------------------------------
+                    [1] View most valuable asset
+                    [2] View least valuable asset
+                    [3] View all assets
+                    [4] Back to home screen
+                    """);
+            selectedOption = Console.promptForInt("› Select [1-4]: ");
+            switch (selectedOption) {
+                case 1 -> processMostValuableAsset(); // Print most valuable asset
+                case 2 -> processLeastValuableAsset(); // Print least valuable asset
+                case 3 -> portfolio.getAllAssets(); // View all aseets
+                case 4 -> {
+                } // Return to main menu
+                default -> System.out.println("Number should be between 1 and 4.");
+            }
+        }
+    }
+
+    private static void processMostValuableAsset() {
+        Valuable mostValuable = portfolio.getMostValuable();
+        System.out.println("Most valuable asset: " + mostValuable.getName());
+        System.out.println("Value: " + mostValuable.getValue());
+    }
+
+    private static void processLeastValuableAsset() {
+        Valuable leastValuable = portfolio.getLeastValuable();
+        System.out.println("Least valuable asset: " + leastValuable.getName());
+        System.out.println("Value: " + leastValuable.getValue());
     }
 }
