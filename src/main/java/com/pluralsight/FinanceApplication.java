@@ -21,11 +21,6 @@ public class FinanceApplication {
 
         // Display menu
         displayHomeScreen();
-        BankAccount account1 = new BankAccount("Pam", "123", new BigDecimal("12500"));
-        CreditCard account2 = new CreditCard("Gary", "456", new BigDecimal("1500"));
-
-        account1.deposit(new BigDecimal(100));
-        account2.charge(new BigDecimal(100));
     }
 
     // Displays welcome message
@@ -38,6 +33,9 @@ public class FinanceApplication {
 
     // Displays menu
     public static void displayHomeScreen() {
+        // Repeat prompt until valid number
+        int selectedOption = 0;
+        while (selectedOption != 7) {
         System.out.println("""
                 \n------------------------------
                              Home
@@ -50,10 +48,6 @@ public class FinanceApplication {
                 [6] View all assets
                 [7] Exit
                 """);
-        int selectedOption = 0;
-
-        // Repeat prompt until valid number
-        while (selectedOption != 7) {
             selectedOption = Console.promptForInt("› Select [0-6]: ");
             switch (selectedOption) {
                 case 1 -> addBankAccount();
@@ -74,31 +68,51 @@ public class FinanceApplication {
         BigDecimal balance = Console.promptForBigDecimal("Enter balance: ").setScale(2, RoundingMode.HALF_UP);
         BankAccount bankAccount = new BankAccount(name, accountNumber, balance); // Create bank account
         portfolio.add(bankAccount); // Add account to portfolio
-        printAssetAddedMessage(bankAccount); // Success message
+        printAssetAddedMessage(); // Success message
     }
 
     private static void addCreditCard() {
         String name = Console.promptForString("Enter account name: ");
         String accountNumber = Console.promptForString("Enter account number: ");
         BigDecimal balance = Console.promptForBigDecimal("Enter balance: ").setScale(2, RoundingMode.HALF_UP);
-        CreditCard creditCard = new CreditCard(name, accountNumber, balance); // Create bank account
-        portfolio.add(creditCard); // Add account to portfolio
-        printAssetAddedMessage(creditCard); // Success message
+        CreditCard creditCard = new CreditCard(name, accountNumber, balance); // Create credit card
+        portfolio.add(creditCard); // Add credit card to portfolio
+        printAssetAddedMessage(); // Success message
     }
 
     private static void addHouse() {
+        String name = Console.promptForString("Enter house address: ");
+        BigDecimal marketValue = Console.promptForBigDecimal("Enter market value: ").setScale(2, RoundingMode.HALF_UP);
+        int yearBuilt = Console.promptForInt("Enter year when house was built: ");
+        int squareFeet = Console.promptForInt("Enter total square feet: ");
+        int bedrooms= Console.promptForInt("Enter number of bedrooms: ");
+House house = new House(name, marketValue, yearBuilt, squareFeet, bedrooms); // Create house asset
+        portfolio.add(house); // Add house to portfolio
+        printAssetAddedMessage(); // Success message
     }
 
     private static void addGold() {
+        String name = Console.promptForString("Enter gold item name: ");
+        BigDecimal marketValue = Console.promptForBigDecimal("Enter market value: ").setScale(2, RoundingMode.HALF_UP);
+        double weight = Console.promptForDouble("Enter gold weight in grams: ");
+        Gold gold = new Gold(name, marketValue, weight; // Create gold asset
+        portfolio.add(gold); // Add gold to portfolio
+        printAssetAddedMessage(); // Success message
     }
 
     private static void addJewelry() {
+        String name = Console.promptForString("Enter jewelry item name: ");
+        BigDecimal marketValue = Console.promptForBigDecimal("Enter market value: ").setScale(2, RoundingMode.HALF_UP);
+        double karat = Console.promptForDouble("Enter number of karats: ");
+        Jewelry jewelry = new Jewelry(name, marketValue, karat); // Create jewelry asset
+        portfolio.add(jewelry); // Add gold to portfolio
+        printAssetAddedMessage(); // Success message
     }
 
     private static void viewAllAssets() {
     }
 
-    private static void printAssetAddedMessage(Valuable asset) {
+    private static void printAssetAddedMessage() {
         System.out.println("\nAsset successfully added to your portfolio!");
     }
 }

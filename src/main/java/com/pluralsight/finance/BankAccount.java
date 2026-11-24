@@ -49,4 +49,9 @@ public class BankAccount implements Valuable {
     public BigDecimal getValue() {
         return balance.setScale(2, RoundingMode.HALF_UP);
     }
+
+    @Override
+    public String toString() {
+        return "\nBank account: " + getName() + getAccountNumber() + getBalance();
+    }
 }
