@@ -22,4 +22,9 @@ public class Jewelry extends FixedAsset {
     public BigDecimal getValue() {
         return getMarketValue();
     }
+
+    @Override
+    public String toString() {
+        return "Jewelry: " + getName() + "|market value: " + getMarketValue() + "|karats: " + getKarat() + "";
+    }
 }

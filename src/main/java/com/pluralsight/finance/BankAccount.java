@@ -52,6 +52,6 @@ public class BankAccount implements Valuable {
 
     @Override
     public String toString() {
-        return "\nBank account: " + getName() + getAccountNumber() + getBalance();
+        return "Bank account: " + getName() + "|account number: " + getAccountNumber() + "|balance: " + getBalance();
     }
 }

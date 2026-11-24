@@ -67,4 +67,11 @@ public class Portfolio implements Valuable {
         }
         return minValue.setScale(2, RoundingMode.HALF_UP);
     }
+
+    // Returns all assets in assets list
+    public void getAllAssets() {
+        for (Valuable v : assets) {
+            System.out.println(v);
+        }
+    }
 }

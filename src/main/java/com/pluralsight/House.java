@@ -42,4 +42,11 @@ public class House extends FixedAsset{
     public BigDecimal getValue() {
         return getMarketValue();
     }
+
+    @Override
+    public String toString() {
+        return "House: " + getName() + "|market value: " + getMarketValue() +
+                "|year built: " + getYearBuilt() + "|square feet: " + getSquareFeet() +
+                "|bedrooms: " + getBedrooms();
+    }
 }

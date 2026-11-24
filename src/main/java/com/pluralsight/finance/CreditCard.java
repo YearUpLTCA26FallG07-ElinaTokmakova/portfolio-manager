@@ -12,7 +12,7 @@ public class CreditCard implements Valuable {
     public CreditCard(String name, String accountNumber, BigDecimal balance) {
         this.name = name;
         this.accountNumber = accountNumber;
-        this.balance = balance.setScale(2, RoundingMode.HALF_UP);
+        this.balance = balance.setScale(2, RoundingMode.HALF_UP).negate();
     }
 
     public String getName() {
@@ -37,16 +37,21 @@ public class CreditCard implements Valuable {
 
     // Adds money to balance
     public void charge(BigDecimal amount) {
-        balance = balance.add(amount).setScale(2, RoundingMode.HALF_UP);
+        balance = balance.subtract(amount).setScale(2, RoundingMode.HALF_UP);
     }
 
     // Subtracts money from balance
     public void pay(BigDecimal amount) {
-        balance = balance.subtract(amount).setScale(2, RoundingMode.HALF_UP);
+        balance = balance.add(amount).setScale(2, RoundingMode.HALF_UP);
     }
 
     // Returns balance value
     public BigDecimal getValue() {
         return balance.setScale(2, RoundingMode.HALF_UP);
+    }
+
+    @Override
+    public String toString() {
+        return "Credit card: " + getName() + "|account number: " + getAccountNumber() + "|balance: " + getBalance();
     }
 }

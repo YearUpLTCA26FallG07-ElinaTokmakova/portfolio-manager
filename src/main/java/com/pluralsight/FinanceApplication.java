@@ -4,6 +4,7 @@ import com.pluralsight.finance.BankAccount;
 import com.pluralsight.finance.CreditCard;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 
 public class FinanceApplication {
     private static Portfolio portfolio;
@@ -55,7 +56,7 @@ public class FinanceApplication {
                 case 3 -> addHouse();
                 case 4 -> addGold();
                 case 5 -> addJewelry();
-                case 6 -> viewAllAssets();
+                case 6 -> portfolio.getAllAssets();
                 case 7 -> System.out.println("\nThanks for using our app!");
                 default -> System.out.println("Number should be between 1 and 6.");
             }
@@ -95,7 +96,7 @@ House house = new House(name, marketValue, yearBuilt, squareFeet, bedrooms); // 
         String name = Console.promptForString("Enter gold item name: ");
         BigDecimal marketValue = Console.promptForBigDecimal("Enter market value: ").setScale(2, RoundingMode.HALF_UP);
         double weight = Console.promptForDouble("Enter gold weight in grams: ");
-        Gold gold = new Gold(name, marketValue, weight; // Create gold asset
+        Gold gold = new Gold(name, marketValue, weight); // Create gold asset
         portfolio.add(gold); // Add gold to portfolio
         printAssetAddedMessage(); // Success message
     }
@@ -107,9 +108,6 @@ House house = new House(name, marketValue, yearBuilt, squareFeet, bedrooms); // 
         Jewelry jewelry = new Jewelry(name, marketValue, karat); // Create jewelry asset
         portfolio.add(jewelry); // Add gold to portfolio
         printAssetAddedMessage(); // Success message
-    }
-
-    private static void viewAllAssets() {
     }
 
     private static void printAssetAddedMessage() {

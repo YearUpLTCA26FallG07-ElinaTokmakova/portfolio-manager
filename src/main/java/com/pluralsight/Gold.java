@@ -22,4 +22,9 @@ public class Gold extends FixedAsset{
     public BigDecimal getValue() {
         return getMarketValue();
     }
+
+    @Override
+    public String toString() {
+        return "Gold: " + getName() + "|market value: " + getMarketValue() + "|weight: " + getWeight() + " grams";
+    }
 }
